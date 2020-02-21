@@ -3,6 +3,11 @@ import { Typography, Grid, Backdrop } from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Item from '../Item/Item';
 
+import mauiImage from '../../assets/maui.jpeg';
+import ticoImage from '../../assets/tico.jpeg';
+import mayaImage from '../../assets/maya.jpeg';
+import tikiImage from '../../assets/tiki.jpeg';
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -13,15 +18,15 @@ const useStyles = makeStyles((theme: Theme) =>
     }
   })
 );
-const mauiImage = '../../assets/maui.jpeg';
-const ticoImage = '../../assets/tico.jpeg';
-const mayaImage = '../../assets/maya.jpeg';
-const tikiImage = '../../assets/tiki.jpeg';
 
 const MauiDescription =
   'Este Poncho invoca la Flora de la mitica Maui, en Hawaii';
 
 const TicoDescription = 'Este Poncho esta inspirado en Santa Teresa Costa Rica';
+
+const MayaDescription = 'Poncho que proviene de la rivera Maya en Mexico';
+
+const TikiDescription = 'Poncho polinesico';
 
 const Home: FC = () => {
   const classes = useStyles();
@@ -52,7 +57,7 @@ const Home: FC = () => {
           <Item
             ponchoColor="Negro"
             ponchoName="Poncho Maya"
-            ponchoDescription={TicoDescription}
+            ponchoDescription={MayaDescription}
             ponchoPrice={1700}
             ponchoImage={mayaImage}
             ponchoSize="Large"
@@ -62,7 +67,7 @@ const Home: FC = () => {
           <Item
             ponchoColor="#f78923"
             ponchoName="Poncho Tiki"
-            ponchoDescription={TicoDescription}
+            ponchoDescription={TikiDescription}
             ponchoPrice={1700}
             ponchoImage={tikiImage}
             ponchoSize="Large"
