@@ -13,10 +13,10 @@ const useStyles = makeStyles((theme: Theme) =>
     }
   })
 );
-const mauiImage = '../../../public/assets/maui.jpeg';
-const ticoImage = '../../../public/assets/tico.jpeg';
-const mayaImage = '../../../public/assets/maya.jpeg';
-const tikiImage = '../../../public/assets/tiki.jpeg';
+const mauiImage = '../../assets/maui.jpeg';
+const ticoImage = '../../assets/tico.jpeg';
+const mayaImage = '../../assets/maya.jpeg';
+const tikiImage = '../../assets/tiki.jpeg';
 
 const MauiDescription =
   'Este Poncho invoca la Flora de la mitica Maui, en Hawaii';
