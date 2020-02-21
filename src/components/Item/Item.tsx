@@ -43,7 +43,7 @@ const Item: FC<Props> = ({
   useEffect(() => {
     switch (size) {
       case 'Small':
-        setPrice(1200);
+        return setPrice(1200);
       case 'Medium':
         return setPrice(1500);
       default:
