@@ -5,7 +5,11 @@ import InstagramIcon from '@material-ui/icons/Instagram';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {}
+    root: {
+      display: 'flex',
+      justifyContent: 'center',
+      flexGrow: 1
+    }
   })
 );
 const Footer: FC = () => {

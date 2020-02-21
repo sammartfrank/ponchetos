@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Typography, Grid } from '@material-ui/core';
+import { Typography, Grid, Backdrop } from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Item from '../Item/Item';
 
@@ -30,22 +30,22 @@ const Home: FC = () => {
       <Grid container>
         <Grid item>
           <Item
-            ponchoColor="Azul"
+            ponchoColor="Negro"
             ponchoName="Poncho Maui"
             ponchoDescription={MauiDescription}
             ponchoPrice={1700}
             ponchoImage={mauiImage}
-            ponchoSize="L"
+            ponchoSize="Large"
           />
         </Grid>
         <Grid item>
           <Item
-            ponchoColor="Negro"
+            ponchoColor="#fc7272"
             ponchoName="Poncho Tico"
             ponchoDescription={TicoDescription}
             ponchoPrice={1700}
             ponchoImage={ticoImage}
-            ponchoSize="L"
+            ponchoSize="Large"
           />
         </Grid>
         <Grid item>
@@ -55,17 +55,17 @@ const Home: FC = () => {
             ponchoDescription={TicoDescription}
             ponchoPrice={1700}
             ponchoImage={mayaImage}
-            ponchoSize="L"
+            ponchoSize="Large"
           />
         </Grid>
         <Grid item>
           <Item
-            ponchoColor="Negro"
+            ponchoColor="#f78923"
             ponchoName="Poncho Tiki"
             ponchoDescription={TicoDescription}
             ponchoPrice={1700}
             ponchoImage={tikiImage}
-            ponchoSize="L"
+            ponchoSize="Large"
           />
         </Grid>
       </Grid>

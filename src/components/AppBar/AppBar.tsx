@@ -13,13 +13,13 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      flexGrod: 1
+      flexGrow: 1
     },
     menuButton: {
       marginRight: theme.spacing(3)
     },
     title: {
-      flexGrod: 1
+      flexGrow: 1
     }
   })
 );

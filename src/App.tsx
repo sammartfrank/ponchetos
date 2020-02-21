@@ -4,6 +4,7 @@ import { Container } from '@material-ui/core';
 import Home from './components/Home/Home';
 import Appbar from './components/AppBar/AppBar';
 import Footer from './components/Footer/Footer';
+import Muebles from './components/Muebles/Muebles';
 
 const App: FC = () => {
   const [state, setState] = useState(true);
@@ -14,10 +15,10 @@ const App: FC = () => {
     <Container maxWidth="lg">
       <Appbar
         checked={state}
-        appName={state ? 'Ponchetos' : 'Camila Quilez'}
+        appName={state ? 'Ponchetos' : 'Camila Quilez Muebles'}
         handleChange={handleChange}
       />
-      <Home />
+      {state ? <Home /> : <Muebles />}
       <Footer />
     </Container>
   );
