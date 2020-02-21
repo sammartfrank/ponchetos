@@ -32,7 +32,7 @@ const Home: FC = () => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <Grid container>
+      <Grid container justify="center">
         <Grid item>
           <Item
             ponchoColor="Negro"
@@ -45,7 +45,7 @@ const Home: FC = () => {
         </Grid>
         <Grid item>
           <Item
-            ponchoColor="#fc7272"
+            ponchoColor="Azul"
             ponchoName="Poncho Tico"
             ponchoDescription={TicoDescription}
             ponchoPrice={1700}
@@ -55,7 +55,7 @@ const Home: FC = () => {
         </Grid>
         <Grid item>
           <Item
-            ponchoColor="Negro"
+            ponchoColor="Bordo"
             ponchoName="Poncho Maya"
             ponchoDescription={MayaDescription}
             ponchoPrice={1700}
@@ -65,7 +65,7 @@ const Home: FC = () => {
         </Grid>
         <Grid item>
           <Item
-            ponchoColor="#f78923"
+            ponchoColor="Amarillo"
             ponchoName="Poncho Tiki"
             ponchoDescription={TikiDescription}
             ponchoPrice={1700}

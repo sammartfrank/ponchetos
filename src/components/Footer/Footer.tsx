@@ -8,7 +8,8 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       display: 'flex',
       justifyContent: 'center',
-      flexGrow: 1
+      flexGrow: 1,
+      margin: 40
     }
   })
 );
@@ -16,8 +17,8 @@ const Footer: FC = () => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <Grid container>
-        <Link href="https:instagram.com/ponchetoba">
+      <Grid container justify="center">
+        <Link href="https://www.instagram.com/ponchetoba" target="_blank">
           <Button>
             <InstagramIcon />
           </Button>

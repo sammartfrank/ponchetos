@@ -11,11 +11,14 @@ import { InputLabel, Select, MenuItem } from '@material-ui/core';
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 780,
-    margin: 10
+    width: 500,
+    margin: 20
   },
   media: {
     height: 200
+  },
+  content: {
+    marginBottom: 20
   }
 });
 
@@ -62,7 +65,10 @@ const Item: FC<Props> = ({
   const handleReset = () => setColor(ponchoColor);
 
   return (
-    <Card className={classes.root} style={{ background: `${color}` }}>
+    <Card
+      className={classes.root}
+      style={{ borderColor: `1px solid ${color}` }}
+    >
       <CardActionArea>
         <CardMedia
           className={classes.media}
@@ -73,7 +79,12 @@ const Item: FC<Props> = ({
           <Typography gutterBottom variant="h5" component="h2">
             {ponchoName}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
+          <Typography
+            variant="body2"
+            color="textSecondary"
+            component="p"
+            className={classes.content}
+          >
             {ponchoDescription}
           </Typography>
           <Typography variant="subtitle1" color="textPrimary" component="h3">
@@ -107,10 +118,11 @@ const Item: FC<Props> = ({
           placeholder="color"
           onChange={handleColor}
         >
-          <MenuItem value="#ffffff">Negro</MenuItem>
-          <MenuItem value="#4287f5">Azul</MenuItem>
-          <MenuItem value="#7d0606">Bordo</MenuItem>
-          <MenuItem value="#e8e03f">Amarillo</MenuItem>
+          <MenuItem value="Negro">Negro</MenuItem>
+          <MenuItem value="Azul">Azul</MenuItem>
+          <MenuItem value="Bordo">Bordo</MenuItem>
+          <MenuItem value="Amarillo">Amarillo</MenuItem>
+          <MenuItem value="Naranja">Naranja</MenuItem>
         </Select>
       </CardActions>
     </Card>
