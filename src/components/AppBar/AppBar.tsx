@@ -1,14 +1,17 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import {
   Toolbar,
   AppBar,
   IconButton,
   Typography,
-  Switch
+  Badge,
+  Button
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+
+import { CartProvider } from '../../providers/CartProvider';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,12 +29,12 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface Props {
   appName: string;
-  checked: boolean;
-  handleChange: () => void;
+  handleToggle: () => void;
 }
 
-const Appbar: FC<Props> = ({ appName, checked, handleChange }) => {
+const Appbar: FC<Props> = ({ appName, handleToggle }) => {
   const classes = useStyles();
+  const Cart = useContext(CartProvider);
   return (
     <div className={classes.root}>
       <AppBar>
@@ -47,12 +50,11 @@ const Appbar: FC<Props> = ({ appName, checked, handleChange }) => {
           <Typography variant="h6" className={classes.title}>
             {appName}
           </Typography>
-          <Switch
-            checked={checked}
-            onChange={handleChange}
-            value="checkedA"
-            inputProps={{ 'aria-label': 'secondary checkbox' }}
-          />
+          <Button color="inherit" onClick={handleToggle}>
+            <Badge badgeContent={Cart.items.length}>
+              <ShoppingCartIcon />
+            </Badge>
+          </Button>
         </Toolbar>
       </AppBar>
     </div>

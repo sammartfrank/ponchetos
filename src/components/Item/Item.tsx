@@ -22,13 +22,30 @@ const useStyles = makeStyles({
   }
 });
 
+export enum Size {
+  SMALL,
+  MEDIUM,
+  LARGE
+}
+export enum Color {
+  AMARILLO,
+  FUCSIA,
+  VIOLETA,
+  VERDEFLUOR,
+  AZULMARINO,
+  NEGRO,
+  CELESTE,
+  BORDO,
+  ROJO,
+  NARANJA
+}
 interface Props {
   ponchoName: string;
   ponchoPrice: number;
   ponchoDescription: string;
   ponchoImage?: string;
-  ponchoSize: string;
-  ponchoColor: string;
+  ponchoSize: Size;
+  ponchoColor: Color;
 }
 const Item: FC<Props> = ({
   ponchoName,
@@ -45,9 +62,9 @@ const Item: FC<Props> = ({
 
   useEffect(() => {
     switch (size) {
-      case 'Small':
+      case Size.SMALL:
         return setPrice(1200);
-      case 'Medium':
+      case Size.MEDIUM:
         return setPrice(1500);
       default:
         setPrice(1700);
@@ -55,14 +72,16 @@ const Item: FC<Props> = ({
   }, [size]);
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setSize(event.target.value as string);
+    setSize(event.target.value as Size);
   };
 
   const handleColor = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setColor(event.target.value as string);
+    setColor(event.target.value as Color);
   };
 
   const handleReset = () => setColor(ponchoColor);
+
+  console.log('rendering');
 
   return (
     <Card
@@ -106,9 +125,9 @@ const Item: FC<Props> = ({
           value={size}
           onChange={handleChange}
         >
-          <MenuItem value="Small">Small</MenuItem>
-          <MenuItem value="Medium">Medium</MenuItem>
-          <MenuItem value="Large">Large</MenuItem>
+          <MenuItem value={Size.SMALL}>Small</MenuItem>
+          <MenuItem value={Size.MEDIUM}>Medium</MenuItem>
+          <MenuItem value={Size.LARGE}>Large</MenuItem>
         </Select>
         <InputLabel id="select-label">Color:</InputLabel>
         <Select
@@ -118,11 +137,15 @@ const Item: FC<Props> = ({
           placeholder="color"
           onChange={handleColor}
         >
-          <MenuItem value="Negro">Negro</MenuItem>
-          <MenuItem value="Azul">Azul</MenuItem>
-          <MenuItem value="Bordo">Bordo</MenuItem>
-          <MenuItem value="Amarillo">Amarillo</MenuItem>
-          <MenuItem value="Naranja">Naranja</MenuItem>
+          <MenuItem value={Color.NEGRO}>Negro</MenuItem>
+          <MenuItem value={Color.AZULMARINO}>Azul</MenuItem>
+          <MenuItem value={Color.BORDO}>Bordo</MenuItem>
+          <MenuItem value={Color.AMARILLO}>Amarillo</MenuItem>
+          <MenuItem value={Color.NARANJA}>Naranja</MenuItem>
+          <MenuItem value={Color.CELESTE}>Celeste</MenuItem>
+          <MenuItem value={Color.FUCSIA}>Fucsia</MenuItem>
+          <MenuItem value={Color.VERDEFLUOR}>Verde</MenuItem>
+          <MenuItem value={Color.ROJO}>Rojo</MenuItem>
         </Select>
       </CardActions>
     </Card>

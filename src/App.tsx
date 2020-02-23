@@ -1,25 +1,25 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useContext, useEffect } from 'react';
 import { Container } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 import Home from './components/Home/Home';
+import Carting from './components/Drawer/Cart';
 import Appbar from './components/AppBar/AppBar';
 import Footer from './components/Footer/Footer';
-import Muebles from './components/Muebles/Muebles';
+import { CartProvider } from './providers/CartProvider';
 
 const App: FC = () => {
-  const [state, setState] = useState(true);
-  const handleChange = (): void => {
-    setState(!state);
-  };
+  const Cart = useContext(CartProvider);
+
+  const [state, setState] = useState(false);
+
+  const handleOnToggle = () => setState(!state);
   return (
-    <Container maxWidth="lg">
-      <Appbar
-        checked={state}
-        appName={state ? 'Ponchetos' : 'Camila Quilez Muebles'}
-        handleChange={handleChange}
-      />
-      {state ? <Home /> : <Muebles />}
+    <Container maxWidth="md">
+      <CartProvider.Provider value={Cart}>
+        <Carting open={state} toggleDrawer={handleOnToggle} />
+        <Appbar appName="Ponchetos" handleToggle={handleOnToggle} />
+        <Home />
+      </CartProvider.Provider>
       <Footer />
     </Container>
   );
