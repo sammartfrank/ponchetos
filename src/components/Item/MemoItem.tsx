@@ -11,10 +11,11 @@ import {
   MenuItem,
   CardMedia
 } from '@material-ui/core';
+import { v4 as uuidv4 } from 'uuid';
+
+import cartContext from '../../providers/cartContext';
 
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import { CartProvider } from '../../providers/CartProvider';
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -51,25 +52,25 @@ export enum Color {
 }
 
 interface Props {
-  ponchoName: string;
-  ponchoPrice: number;
-  ponchoColor: Color;
-  ponchoSize: Size;
-  ponchoImage: string;
-  ponchoDescription: string;
+  ponchoName?: string;
+  ponchoPrice?: number;
+  ponchoColor?: Color;
+  ponchoSize?: Size;
+  ponchoImage?: string;
+  ponchoDescription?: string;
 }
 
 const MemoItem: FC<Props> = memo(
   ({
-    ponchoName,
-    ponchoPrice,
-    ponchoImage,
-    ponchoSize,
-    ponchoDescription,
-    ponchoColor
+    ponchoName = 'Nombre del Poncho',
+    ponchoPrice = 0,
+    ponchoImage = '',
+    ponchoSize = Size.LARGE,
+    ponchoDescription = 'Insert Description',
+    ponchoColor = Color.NEGRO
   }) => {
     const classes = useStyles();
-    const Cart = useContext(CartProvider);
+    const { addNew } = useContext(cartContext);
     const [size, setSize] = useState(ponchoSize);
     const [price, setPrice] = useState(ponchoPrice);
     const [color, setColor] = useState(ponchoColor);
@@ -85,14 +86,22 @@ const MemoItem: FC<Props> = memo(
       }
     }, [size]);
 
-    const handleColor = (event: React.ChangeEvent<{ value: unknown }>) => {
-      setColor(event.target.value as Color);
-    };
+    // const handleColor = (event: React.ChangeEvent<{ value: unknown }>) => {
+    //   setColor(event.target.value as Color);
+    // };
     const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
       setSize(event.target.value as Size);
     };
     const handleOnClick = (event: React.MouseEvent<HTMLButtonElement>) => {
       console.log('Adding an Item');
+      const mockProduct = {
+        id: uuidv4(),
+        name: 'ponchoName',
+        count: 1
+      };
+      if (addNew) {
+        addNew(mockProduct);
+      }
     };
     const handleModal = () => console.log('Consulta, Modal');
     return (
@@ -122,7 +131,7 @@ const MemoItem: FC<Props> = memo(
           <Button size="small" color="primary" onClick={handleModal}>
             Consultar
           </Button>
-          {/* <Select
+          <Select
             labelId="select-label"
             id="select"
             value={size}
@@ -132,7 +141,7 @@ const MemoItem: FC<Props> = memo(
             <MenuItem value={Size.MEDIUM}>Medium</MenuItem>
             <MenuItem value={Size.LARGE}>Large</MenuItem>
           </Select>
-          <Select
+          {/* <Select
             labelId="select-label"
             id="select"
             value={color}

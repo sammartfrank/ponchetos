@@ -1,9 +1,8 @@
 import React, { FC, useContext } from 'react';
-import { Typography, Grid, Backdrop } from '@material-ui/core';
+import { Grid, Backdrop, Typography } from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import MemoItem from '../Item/MemoItem';
-
-import { CartProvider } from '../../providers/CartProvider';
+import cartContext from '../../providers/cartContext';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -18,22 +17,14 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Home: FC = () => {
   const classes = useStyles();
-  const Cart = useContext(CartProvider);
+  const { cart } = useContext(cartContext);
   return (
     <div className={classes.root}>
       <Grid container justify="center">
-        {Cart.products.ponchos.map(
-          ({ name, price, size, url, desc, color }, i) => (
-            <MemoItem
-              ponchoName={name}
-              ponchoPrice={price}
-              ponchoSize={size}
-              ponchoImage={url}
-              ponchoDescription={desc}
-              ponchoColor={color}
-              key={i}
-            />
-          )
+        {cart.length ? (
+          cart.map(item => <MemoItem />)
+        ) : (
+          <Typography variant="subtitle1">No Items</Typography>
         )}
       </Grid>
     </div>

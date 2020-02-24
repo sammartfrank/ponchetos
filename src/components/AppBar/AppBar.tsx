@@ -10,8 +10,7 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-
-import { CartProvider } from '../../providers/CartProvider';
+import cartContext from '../../providers/cartContext';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,7 +33,7 @@ interface Props {
 
 const Appbar: FC<Props> = ({ appName, handleToggle }) => {
   const classes = useStyles();
-  const Cart = useContext(CartProvider);
+  const { cartCount } = useContext(cartContext);
   return (
     <div className={classes.root}>
       <AppBar>
@@ -50,8 +49,8 @@ const Appbar: FC<Props> = ({ appName, handleToggle }) => {
           <Typography variant="h6" className={classes.title}>
             {appName}
           </Typography>
-          <Button color="inherit" onClick={handleToggle}>
-            <Badge badgeContent={Cart.items.length}>
+          <Button onClick={handleToggle} color="inherit">
+            <Badge badgeContent={cartCount} color="secondary" showZero>
               <ShoppingCartIcon />
             </Badge>
           </Button>
