@@ -13,6 +13,7 @@ import {
 import { v4 as uuidv4 } from 'uuid';
 import CheckIcon from '@material-ui/icons/Check';
 import AddIcon from '@material-ui/icons/Add';
+import RemoveIcon from '@material-ui/icons/Remove';
 
 import cartContext from '../../providers/cartContext';
 
@@ -153,6 +154,9 @@ const MemoItem: FC<Props> = memo(
                 <AddIcon onClick={handleQtyAdd} />
               </Button>
               <span>{quantity}</span>
+              <Button color="primary" onClick={handleQtyDec}>
+                <RemoveIcon />
+              </Button>
               <Button onClick={handleOnClick}>
                 <CheckIcon color="primary" />
               </Button>
