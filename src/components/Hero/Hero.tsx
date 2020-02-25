@@ -27,9 +27,9 @@ const useStyles = makeStyles((theme: Theme) =>
       transform: 'translate(-50%, -50%)'
     },
     bold: {
-      fontWeight: 800,
+      fontWeight: 600,
       fontSize: theme.spacing(10),
-      letterSpacing: theme.spacing(4)
+      letterSpacing: theme.spacing(9)
     }
   })
 );
@@ -47,7 +47,11 @@ const Hero: FC = () => {
   return (
     <div>
       <div className={classes.videoWrapper}>
-        <img src={marcito} alt="" className={classes.fullCover} />
+        <img
+          src="https://images.unsplash.com/photo-1524275804141-5e9f2bc5a71d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"
+          alt=""
+          className={classes.fullCover}
+        />
       </div>
       <div className={classes.heroTitle}>
         <Fade in={ready}>

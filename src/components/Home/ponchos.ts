@@ -1,8 +1,3 @@
-import mauiImage from '../../assets/maui.jpeg';
-import ticoImage from '../../assets/tico.jpeg';
-import mayaImage from '../../assets/maya.jpeg';
-import tikiImage from '../../assets/tiki.jpeg';
-
 import { Size, Color } from '../Item/MemoItem';
 
 import { v4 as uuidv4 } from 'uuid';
@@ -14,7 +9,7 @@ export const ponchos = [
     id: uuidv4(),
     size: Size.LARGE,
     color: Color.FUCSIA,
-    url: mauiImage,
+    // url: mauiImage,
     price: 1700
   },
   {
@@ -23,7 +18,7 @@ export const ponchos = [
     id: uuidv4(),
     size: Size.MEDIUM,
     color: Color.ROJO,
-    url: mauiImage,
+    // url: mauiImage,
     price: 1500
   },
   {
@@ -32,7 +27,7 @@ export const ponchos = [
     id: uuidv4(),
     size: Size.LARGE,
     color: Color.BORDO,
-    url: mauiImage,
+    // url: mauiImage,
     price: 1700
   },
   {
@@ -41,7 +36,7 @@ export const ponchos = [
     id: uuidv4(),
     size: Size.LARGE,
     color: Color.FUCSIA,
-    url: mauiImage,
+    // url: mauiImage,
     price: 1700
   }
 ];

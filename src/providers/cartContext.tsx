@@ -7,7 +7,7 @@ export type Item = {
   name: string;
   color: Color;
   size: Size;
-  url: string;
+  url?: string;
   price: number;
 };
 
