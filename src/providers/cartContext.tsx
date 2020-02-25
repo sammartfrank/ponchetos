@@ -1,16 +1,23 @@
 import React, { createContext } from 'react';
+import { Color, Size } from '../components/Item/MemoItem';
 
-type ItemType = {
+export type Item = {
   count: number;
   id: string;
   name: string;
+  color: Color;
+  size: Size;
+  url: string;
+  price: number;
 };
 
 interface IState {
-  cart: ItemType[];
+  cart: Item[];
   cartCount: number;
-  addNew?: (product: ItemType) => void;
+  addNew?: (product: any) => void;
   removePd?: (index: number) => void;
+  getSubTotal?: () => void;
+  subtotal?: number;
 }
 
 const initialState: IState = {
@@ -21,73 +28,3 @@ const initialState: IState = {
 const cartContext = createContext(initialState);
 
 export default cartContext;
-
-// import mauiImage from '../assets/maui.jpeg';
-// import ticoImage from '../assets/tico.jpeg';
-// import mayaImage from '../assets/maya.jpeg';
-// import tikiImage from '../assets/tiki.jpeg';
-
-// export enum Size {
-//   SMALL,
-//   MEDIUM,
-//   LARGE
-// }
-// export enum Color {
-//   AMARILLO,
-//   FUCSIA,
-//   VIOLETA,
-//   VERDEFLUOR,
-//   AZULMARINO,
-//   NEGRO,
-//   CELESTE,
-//   BORDO,
-//   ROJO,
-//   NARANJA
-// }
-
-// export const CartProvider = createContext({
-//   products: {
-//     ponchos: [
-//       {
-//         name: 'Maui',
-//         size: Size.LARGE,
-//         color: Color.NEGRO,
-//         price: 1700,
-//         desc: 'Poncho Hawaiiano',
-//         url: mauiImage
-//       },
-//       {
-//         name: 'Tico',
-//         size: Size.MEDIUM,
-//         color: Color.AMARILLO,
-//         price: 1500,
-//         desc: 'Poncho de Costa Rica',
-//         url: ticoImage
-//       },
-//       {
-//         name: 'Maya',
-//         size: Size.SMALL,
-//         color: Color.AMARILLO,
-//         price: 1200,
-//         desc: 'Poncho Mexicano',
-//         url: mayaImage
-//       },
-//       {
-//         name: 'Tiki',
-//         size: Size.LARGE,
-//         color: Color.AZULMARINO,
-//         price: 1700,
-//         desc: 'Poncho Polinesico',
-//         url: tikiImage
-//       }
-//     ],
-//     gorras: [
-//       {
-//         gorraName: 'Gorriaran Merlo',
-//         gorraPrice: 340,
-//         gorraDescription: 'Gorra la gente de Merlo'
-//       }
-//     ]
-//   },
-//   items: []
-// });

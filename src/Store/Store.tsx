@@ -1,18 +1,14 @@
 import React, { useState, useEffect, FC } from 'react';
 
-import cartContext from '../providers/cartContext';
-
-type ItemType = {
-  count: number;
-  id: string;
-  name: string;
-};
+import cartContext, { Item } from '../providers/cartContext';
 
 interface IState {
-  cart: ItemType[];
+  cart: Item[];
   cartCount: number;
-  addNew: (product: ItemType) => void;
+  addNew: (product: Item) => void;
   removePd: (index: number) => void;
+  getSubtotal: () => void;
+  subtotal: number;
 }
 
 const Store: FC = ({ children }) => {
@@ -20,17 +16,23 @@ const Store: FC = ({ children }) => {
     cart: [],
     cartCount: 0,
     addNew: addNew,
-    removePd: removePd
+    removePd: removePd,
+    getSubtotal: getSubtotal,
+    subtotal: 0
   };
 
   const [appstate, setState] = useState(initialState);
 
-  function addNew(product: ItemType) {
+  function addNew(product: Item) {
     let newList = appstate.cart;
     const newItem = {
-      count: 1,
+      count: product.count,
       id: product.id,
-      name: product.name
+      name: product.name,
+      color: product.color,
+      size: product.size,
+      url: product.url,
+      price: product.price
     };
     const filtered = newList.filter(i => {
       return i.id === product.id;
@@ -47,13 +49,23 @@ const Store: FC = ({ children }) => {
       newList.push(newItem);
     }
 
-    setState({ ...appstate, cart: newList, cartCount: getCartCount() });
+    setState({
+      ...appstate,
+      cart: newList,
+      cartCount: getCartCount(),
+      subtotal: getSubtotal()
+    });
   }
 
   function removePd(index: number) {
     const cartList = appstate.cart;
     cartList.splice(index, 1);
-    setState({ ...appstate, cart: cartList, cartCount: getCartCount() });
+    setState({
+      ...appstate,
+      cart: cartList,
+      cartCount: getCartCount(),
+      subtotal: getSubtotal()
+    });
   }
 
   function getCartCount() {
@@ -65,6 +77,16 @@ const Store: FC = ({ children }) => {
     }
 
     return countTally;
+  }
+
+  function getSubtotal() {
+    let count = 0;
+    if (appstate.cart.length > 0) {
+      appstate.cart.forEach(item => {
+        count += item.price;
+      });
+    }
+    return count;
   }
 
   return (

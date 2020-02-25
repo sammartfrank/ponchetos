@@ -6,12 +6,13 @@ import {
   Typography,
   CardActions,
   Button,
-  InputLabel,
   Select,
   MenuItem,
   CardMedia
 } from '@material-ui/core';
 import { v4 as uuidv4 } from 'uuid';
+import CheckIcon from '@material-ui/icons/Check';
+import AddIcon from '@material-ui/icons/Add';
 
 import cartContext from '../../providers/cartContext';
 
@@ -28,6 +29,11 @@ const useStyles = makeStyles((theme: Theme) =>
     action: {
       display: 'flex',
       justifyContent: 'space-evenly'
+    },
+    tick: {
+      display: 'flex',
+      justifyContent: 'flex-end',
+      padding: theme.spacing(2)
     }
   })
 );
@@ -70,10 +76,12 @@ const MemoItem: FC<Props> = memo(
     ponchoColor = Color.NEGRO
   }) => {
     const classes = useStyles();
-    const { addNew } = useContext(cartContext);
+    const { addNew, cart } = useContext(cartContext);
     const [size, setSize] = useState(ponchoSize);
     const [price, setPrice] = useState(ponchoPrice);
     const [color, setColor] = useState(ponchoColor);
+    const [quantity, setQuantity] = useState(0);
+    const [shopped, setShopped] = useState(false);
 
     useEffect(() => {
       switch (size) {
@@ -86,21 +94,35 @@ const MemoItem: FC<Props> = memo(
       }
     }, [size]);
 
-    // const handleColor = (event: React.ChangeEvent<{ value: unknown }>) => {
-    //   setColor(event.target.value as Color);
-    // };
+    const handleColor = (event: React.ChangeEvent<{ value: unknown }>) => {
+      setColor(event.target.value as Color);
+    };
     const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
       setSize(event.target.value as Size);
     };
+
+    const handleQtyAdd = () => {
+      setQuantity(prevState => (prevState += 1));
+      setShopped(true);
+    };
+    const handleQtyDec = () =>
+      setQuantity(prevState => {
+        if (prevState === 0) return prevState;
+        return (prevState -= 1);
+      });
+
     const handleOnClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-      console.log('Adding an Item');
-      const mockProduct = {
+      let product = {
         id: uuidv4(),
-        name: 'ponchoName',
-        count: 1
+        name: ponchoName,
+        size: size,
+        color: color,
+        count: quantity,
+        price: price * quantity
       };
       if (addNew) {
-        addNew(mockProduct);
+        addNew(product);
+        setShopped(true);
       }
     };
     const handleModal = () => console.log('Consulta, Modal');
@@ -125,9 +147,22 @@ const MemoItem: FC<Props> = memo(
           </CardContent>
         </CardActionArea>
         <CardActions className={classes.action}>
-          <Button size="small" color="primary" onClick={handleOnClick}>
-            Agregar
-          </Button>
+          {shopped ? (
+            <div className={classes.tick}>
+              <Button color="primary">
+                <AddIcon onClick={handleQtyAdd} />
+              </Button>
+              <span>{quantity}</span>
+              <Button onClick={handleOnClick}>
+                <CheckIcon color="primary" />
+              </Button>
+            </div>
+          ) : (
+            <Button size="small" color="primary" onClick={handleQtyAdd}>
+              Comprar
+            </Button>
+          )}
+
           <Button size="small" color="primary" onClick={handleModal}>
             Consultar
           </Button>
@@ -141,7 +176,7 @@ const MemoItem: FC<Props> = memo(
             <MenuItem value={Size.MEDIUM}>Medium</MenuItem>
             <MenuItem value={Size.LARGE}>Large</MenuItem>
           </Select>
-          {/* <Select
+          <Select
             labelId="select-label"
             id="select"
             value={color}
@@ -157,7 +192,7 @@ const MemoItem: FC<Props> = memo(
             <MenuItem value={Color.FUCSIA}>Fucsia</MenuItem>
             <MenuItem value={Color.VERDEFLUOR}>Verde</MenuItem>
             <MenuItem value={Color.ROJO}>Rojo</MenuItem>
-          </Select> */}
+          </Select>
         </CardActions>
       </Card>
     );

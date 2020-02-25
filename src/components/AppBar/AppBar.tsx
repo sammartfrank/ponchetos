@@ -21,7 +21,8 @@ const useStyles = makeStyles((theme: Theme) =>
       marginRight: theme.spacing(3)
     },
     title: {
-      flexGrow: 1
+      flexGrow: 1,
+      color: 'white'
     }
   })
 );
@@ -36,7 +37,7 @@ const Appbar: FC<Props> = ({ appName, handleToggle }) => {
   const { cartCount } = useContext(cartContext);
   return (
     <div className={classes.root}>
-      <AppBar>
+      <AppBar color="transparent">
         <Toolbar>
           <IconButton
             color="inherit"
@@ -46,7 +47,7 @@ const Appbar: FC<Props> = ({ appName, handleToggle }) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" className={classes.title}>
+          <Typography variant="h6" className={classes.title} color="secondary">
             {appName}
           </Typography>
           <Button onClick={handleToggle} color="inherit">
