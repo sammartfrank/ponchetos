@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
     tick: {
       display: 'flex',
       justifyContent: 'flex-end',
+      alignItems: 'center',
       padding: theme.spacing(2)
     }
   })

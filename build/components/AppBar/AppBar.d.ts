@@ -1,8 +1,7 @@
 import { FC } from 'react';
 interface Props {
     appName: string;
-    checked: boolean;
-    handleChange: () => void;
+    handleToggle: () => void;
 }
 declare const Appbar: FC<Props>;
 export default Appbar;
