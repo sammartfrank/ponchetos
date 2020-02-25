@@ -14,15 +14,19 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     cartText: {
       display: 'flex',
-      justifyContent: 'center',
+      justifyContent: 'flex-start',
       alignItems: 'center',
-      margin: theme.spacing(2)
+      margin: theme.spacing(3)
     },
     itemCart: {
       padding: theme.spacing(3)
     },
     tallyWrapper: {
       padding: theme.spacing(3)
+    },
+    alignMargin: {
+      marginTop: theme.spacing(2),
+      marginBottom: theme.spacing(2)
     }
   })
 );
@@ -72,10 +76,10 @@ const Carting: FC<Props> = ({ open, toggleDrawer }) => {
           container
           direction="column"
           justify="space-between"
-          alignItems="center"
+          alignItems="flex-start"
           className={classes.tallyWrapper}
         >
-          <Grid item>
+          <Grid item className={classes.alignMargin}>
             <Typography variant="h6" component="h6">
               Total: ${subtotal}
             </Typography>
@@ -86,8 +90,21 @@ const Carting: FC<Props> = ({ open, toggleDrawer }) => {
               type="submit"
               color="secondary"
               onClick={() => console.log('checkout on spot')}
+              className={classes.alignMargin}
+              disabled={cart.length === 0}
             >
               Realizar Pedido
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button
+              variant="outlined"
+              type="submit"
+              color="primary"
+              onClick={toggleDrawer}
+              className={classes.alignMargin}
+            >
+              Cancelar
             </Button>
           </Grid>
         </Grid>

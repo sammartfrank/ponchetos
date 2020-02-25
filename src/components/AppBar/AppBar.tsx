@@ -5,7 +5,8 @@ import {
   IconButton,
   Typography,
   Badge,
-  Button
+  Button,
+  useScrollTrigger
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
@@ -24,6 +25,9 @@ const useStyles = makeStyles((theme: Theme) =>
     title: {
       flexGrow: 1,
       color: 'white'
+    },
+    palidCart: {
+      color: 'white'
     }
   })
 );
@@ -33,31 +37,61 @@ interface Props {
   handleToggle: () => void;
 }
 
+interface IProps {
+  window?: () => Window;
+  children: React.ReactElement;
+}
+
 const Appbar: FC<Props> = ({ appName, handleToggle }) => {
-  const classes = useStyles();
   const { cartCount } = useContext(cartContext);
+  const classes = useStyles();
+
+  function ChangeOnScroll({ window, children }: IProps) {
+    const trigger = useScrollTrigger({
+      target: window ? window() : undefined,
+      disableHysteresis: true,
+      threshold: 700
+    });
+    return React.cloneElement(children, {
+      color: trigger ? 'inherit' : 'transparent',
+      style: {
+        background: trigger && 'rgba(0,0,0,0.5)'
+      }
+    });
+  }
   return (
     <div className={classes.root}>
-      <AppBar color="transparent">
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="menu"
-            aria-haspopup="true"
-            className={classes.menuButton}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title} color="secondary">
-            {appName}
-          </Typography>
-          <Button onClick={handleToggle} color="inherit">
-            <Badge badgeContent={cartCount} color="secondary" showZero>
-              <ShoppingCartIcon />
-            </Badge>
-          </Button>
-        </Toolbar>
-      </AppBar>
+      <ChangeOnScroll>
+        <AppBar color="transparent" elevation={0}>
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="menu"
+              aria-haspopup="true"
+              className={classes.menuButton}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography
+              variant="h6"
+              className={classes.title}
+              color="secondary"
+            >
+              {appName}
+            </Typography>
+            <Button onClick={handleToggle} color="inherit">
+              <Badge
+                badgeContent={cartCount}
+                className={classes.palidCart}
+                color="secondary"
+                showZero
+              >
+                <ShoppingCartIcon />
+              </Badge>
+            </Button>
+          </Toolbar>
+        </AppBar>
+      </ChangeOnScroll>
     </div>
   );
 };

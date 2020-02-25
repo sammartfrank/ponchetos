@@ -21,13 +21,14 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      width: 600,
-      marginBottom: theme.spacing(25)
+      width: '100%',
+      marginBottom: theme.spacing(15)
     },
     media: {
       height: theme.spacing(40)
     },
     action: {
+      width: '100%',
       display: 'flex',
       justifyContent: 'space-evenly'
     },
@@ -40,22 +41,21 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export enum Size {
-  SMALL,
-  MEDIUM,
-  LARGE
+  SMALL = 'SMALL',
+  MEDIUM = 'MEDIUM',
+  LARGE = 'LARGE'
 }
 export enum Color {
-  AMARILLO,
-  FUCSIA,
-  VIOLETA,
-  VERDEFLUOR,
-  AZULMARINO,
-  NEGRO,
-  CELESTE,
-  BORDO,
-  ROJO,
-  NARANJA,
-  map
+  AMARILLO = 'AMARILLO',
+  FUCSIA = 'FUCSIA',
+  VIOLETA = 'VIOLETA',
+  VERDEFLUOR = 'VERDEFLUOR',
+  AZULMARINO = 'AZULMARINO',
+  NEGRO = 'NEGRO',
+  CELESTE = 'CELESTE',
+  BORDO = 'BORDO',
+  ROJO = 'ROJO',
+  NARANJA = 'NARANJA'
 }
 
 interface Props {
@@ -103,14 +103,13 @@ const MemoItem: FC<Props> = memo(
     };
 
     const handleQtyAdd = () => {
-      setQuantity(prevState => (prevState += 1));
+      setQuantity(quantity + 1);
       setShopped(true);
     };
-    const handleQtyDec = () =>
-      setQuantity(prevState => {
-        if (prevState === 0) return prevState;
-        return (prevState -= 1);
-      });
+    const handleQtyDec = () => {
+      if (quantity === 0) return;
+      return setQuantity(quantity - 1);
+    };
 
     const handleOnClick = (event: React.MouseEvent<HTMLButtonElement>) => {
       let product = {
@@ -154,11 +153,15 @@ const MemoItem: FC<Props> = memo(
                 <AddIcon onClick={handleQtyAdd} />
               </Button>
               <span>{quantity}</span>
-              <Button color="primary" onClick={handleQtyDec}>
+              <Button
+                color="primary"
+                onClick={handleQtyDec}
+                disabled={quantity === 0}
+              >
                 <RemoveIcon />
               </Button>
-              <Button onClick={handleOnClick}>
-                <CheckIcon color="primary" />
+              <Button onClick={handleOnClick} disabled={quantity === 0}>
+                <CheckIcon color={quantity === 0 ? 'disabled' : 'primary'} />
               </Button>
             </div>
           ) : (

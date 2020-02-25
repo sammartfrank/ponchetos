@@ -1,6 +1,5 @@
 import React, { FC, useState } from 'react';
-import { Container, CssBaseline } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { CssBaseline } from '@material-ui/core';
 
 import Home from './components/Home/Home';
 import Carting from './components/Drawer/Cart';
@@ -16,9 +15,7 @@ const App: FC = () => {
       <Appbar appName="Ponchetos" handleToggle={handleOnToggle} />
       <Carting open={state} toggleDrawer={handleOnToggle} />
       <Hero />
-      <Container maxWidth="md">
-        <Home />
-      </Container>
+      <Home />
     </div>
   );
 };
