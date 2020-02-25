@@ -4,7 +4,6 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Typography, Fade } from '@material-ui/core';
 
 import marcito from '../../assets/marcito.jpg';
-import sea from '../../assets/sea.mp4';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -48,9 +47,6 @@ const Hero: FC = () => {
   return (
     <div>
       <div className={classes.videoWrapper}>
-        {/* <video autoPlay loop muted className={classes.fullCover}>
-          <source src={sea} type="video/mp4" />
-        </video> */}
         <img src={marcito} alt="" className={classes.fullCover} />
       </div>
       <div className={classes.heroTitle}>
