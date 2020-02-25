@@ -46,7 +46,7 @@ const Carting: FC<Props> = ({ open, toggleDrawer }) => {
   return (
     <Drawer anchor="right" open={open} onClose={toggleDrawer}>
       <div className={classes.root}>
-        <Grid container direction="column">
+        <Grid container direction="row">
           {cart.length > 0 ? (
             cart.map(({ name, count, price }, i) => (
               <Grid key={i} item className={classes.itemCart}>

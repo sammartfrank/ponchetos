@@ -1,4 +1,4 @@
-import React, { FC, useContext } from 'react';
+import React, { FC, useContext, useEffect } from 'react';
 import {
   Toolbar,
   AppBar,
@@ -55,7 +55,7 @@ const Appbar: FC<Props> = ({ appName, handleToggle }) => {
     return React.cloneElement(children, {
       color: trigger ? 'inherit' : 'transparent',
       style: {
-        background: trigger && 'rgba(0,0,0,0.5)'
+        background: trigger ? 'rgba(0,0,0,0.7)' : 'rgba(0,0,0,0.2)'
       }
     });
   }
