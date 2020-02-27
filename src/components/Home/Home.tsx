@@ -1,28 +1,20 @@
-import React, { FC, useEffect, useState } from 'react';
-import { Typography, Container } from '@material-ui/core';
+import React, { FC, useEffect, useState, useRef } from 'react';
+import {
+  Typography,
+  Container,
+  Slide,
+  Fade,
+  useScrollTrigger
+} from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import MemoItem from '../Item/MemoItem';
 import { Item } from '../../providers/cartContext';
 
 import { ponchos } from './ponchos';
+import Textin from './Text';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      position: 'relative',
-      zIndex: 1
-    },
-    title: {
-      marginTop: theme.spacing(5),
-      marginBottom: theme.spacing(5)
-    },
-    textPoncheto: {
-      marginBottom: theme.spacing(5)
-    },
-    span: {
-      color: 'darkgreen',
-      marginLeft: theme.spacing(1)
-    },
     imageWrapper: {
       padding: '0',
       margin: '0',
@@ -37,13 +29,14 @@ const useStyles = makeStyles((theme: Theme) =>
       height: '100%',
       objectFit: 'cover'
     },
-    textWrapper: {
-      zIndex: 1,
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'flex-end',
-      justifyContent: 'flex-end',
-      background: 'rgba(255, 255, 255, 1)'
+    homeBack: {
+      width: '100%',
+      height: '100vh',
+      backgroundImage: `url(https://images.unsplash.com/photo-1533225737818-2a9101586b15?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80)`,
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
+      backgroundPosition: '50% 50%',
+      position: 'relative'
     }
   })
 );
@@ -51,38 +44,37 @@ const useStyles = makeStyles((theme: Theme) =>
 const Home: FC = () => {
   const classes = useStyles();
   const [list, setList] = useState<Item[]>([]);
+  const [trig, setTrig] = useState(false);
+  const [trig2, setTrig2] = useState(false);
   useEffect(() => {
     setList(ponchos);
   }, []);
 
+  const trigger = useScrollTrigger({
+    target: window,
+    disableHysteresis: true,
+    threshold: 350
+  });
+
+  const trigger2 = useScrollTrigger({
+    target: window,
+    disableHysteresis: true,
+    threshold: 450
+  });
+
+  useEffect(() => {
+    setTrig(!trig);
+  }, [trigger]);
+
+  useEffect(() => {
+    setTrig2(!trig2);
+  }, [trigger2]);
+
   return (
-    <div className={classes.root}>
-      <div className={classes.textWrapper}>
-        <Container maxWidth="sm">
-          <Typography
-            variant="h5"
-            color="textPrimary"
-            className={classes.title}
-          >
-            Nuestros Productos
-          </Typography>
-          <Typography
-            variant="body1"
-            color="textPrimary"
-            component="p"
-            className={classes.textPoncheto}
-          >
-            Hechos a medida, a mano y con la mejor microfibra de toalla. Con
-            nuestras propias maquinas, con nuestra fuerza del
-            <span className={classes.span}>Mar.</span>
-          </Typography>
-          {list
-            ? list.map(({ name, count, id, url }, i) => (
-                <MemoItem ponchoName={name} key={i} ponchoImage={url} />
-              ))
-            : 'No Items'}
-        </Container>
-      </div>
+    <div className={classes.homeBack}>
+      <Container maxWidth="sm">
+        <Textin trig={trig} trig2={trig2} />
+      </Container>
     </div>
   );
 };

@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
       height: '50px',
       width: '50px',
       justifyContent: 'center',
-      background: 'white',
+      background: 'rgba(255,255,255,0.2)',
       borderRadius: '50%',
       cursor: 'pointer',
       alignItems: 'center',
@@ -36,7 +36,11 @@ const Arrow: FC<IProps> = ({ direction, handleClick }): React.ReactElement => {
 
   return (
     <div className={classes.root} onClick={handleClick} style={dir}>
-      {direction === 'right' ? <ArrowRightIcon /> : <ArrowLeftIcon />}
+      {direction === 'right' ? (
+        <ArrowRightIcon color="action" />
+      ) : (
+        <ArrowLeftIcon color="action" />
+      )}
     </div>
   );
 };

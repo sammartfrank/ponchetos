@@ -66,7 +66,13 @@ const Appbar: FC<Props> = ({ appName, handleToggle }) => {
 
   return (
     <div className={classes.root}>
-      <Slide appear={false} direction="down" in={!trig}>
+      <Slide
+        appear={false}
+        direction="down"
+        in={!trig}
+        mountOnEnter
+        unmountOnExit
+      >
         <AppBar elevation={0} className={classes.setBackground}>
           <Toolbar>
             <IconButton
