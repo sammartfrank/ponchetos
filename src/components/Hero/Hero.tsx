@@ -3,6 +3,8 @@ import React, { FC, useState } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Typography, Fade } from '@material-ui/core';
 
+import Slider from '../Slider/Slider';
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     imageWrapper: {
@@ -28,33 +30,23 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+const images = [
+  'https://images.unsplash.com/photo-1572464126136-e24a71f7a587?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80',
+  'https://images.unsplash.com/photo-1580876206759-4b35613ca39c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80',
+  'https://images.unsplash.com/photo-1573398579011-28def4504fdc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80'
+];
+
 const Hero: FC = () => {
   const classes = useStyles();
-  const [ready, setReady] = useState(false);
-
   return (
     <div>
-      <div className={classes.imageWrapper}>
-        <img
-          src="https://images.unsplash.com/photo-1524275804141-5e9f2bc5a71d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"
-          alt=""
-          className={classes.fullCover}
-        />
-      </div>
+      <Slider slides={images} />
       <div className={classes.heroTitle}>
-        {ready ? (
-          <Fade in={ready} timeout={{ enter: 1500, exit: 1600 }}>
-            <Typography color="inherit" variant="h2">
-              Conexion
-            </Typography>
-          </Fade>
-        ) : (
-          <Fade in={!ready} timeout={{ enter: 1500, exit: 1600 }}>
-            <Typography color="inherit" variant="h2">
-              Ponchetos
-            </Typography>
-          </Fade>
-        )}
+        <Fade in={true} timeout={{ enter: 1500, exit: 1600 }}>
+          <Typography color="inherit" variant="h1">
+            Ponchetos
+          </Typography>
+        </Fade>
       </div>
     </div>
   );

@@ -14,6 +14,7 @@ import { v4 as uuidv4 } from 'uuid';
 import CheckIcon from '@material-ui/icons/Check';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 
 import cartContext from '../../providers/cartContext';
 
@@ -84,6 +85,7 @@ const MemoItem: FC<Props> = memo(
     const [color, setColor] = useState(ponchoColor);
     const [quantity, setQuantity] = useState(0);
     const [shopped, setShopped] = useState(false);
+    const [checked, setChecked] = useState(false);
 
     useEffect(() => {
       switch (size) {
@@ -124,6 +126,7 @@ const MemoItem: FC<Props> = memo(
       if (addNew) {
         addNew(product);
         setShopped(true);
+        setChecked(true);
       }
     };
     const handleModal = () => console.log('Consulta, Modal');
@@ -162,7 +165,11 @@ const MemoItem: FC<Props> = memo(
                 <RemoveIcon />
               </Button>
               <Button onClick={handleOnClick} disabled={quantity === 0}>
-                <CheckIcon color={quantity === 0 ? 'disabled' : 'primary'} />
+                {checked ? (
+                  <CheckCircleOutlineIcon color="action" />
+                ) : (
+                  <CheckIcon color={quantity === 0 ? 'disabled' : 'primary'} />
+                )}
               </Button>
             </div>
           ) : (

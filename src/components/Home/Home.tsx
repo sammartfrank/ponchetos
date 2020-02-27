@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Grid, Typography, Container } from '@material-ui/core';
+import { Typography, Container } from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import MemoItem from '../Item/MemoItem';
 import { Item } from '../../providers/cartContext';
@@ -82,13 +82,6 @@ const Home: FC = () => {
               ))
             : 'No Items'}
         </Container>
-      </div>
-      <div className={classes.imageWrapper}>
-        <img
-          src="https://images.unsplash.com/photo-1502217915754-8272dd84a805?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"
-          alt=""
-          className={classes.fullCover}
-        />
       </div>
     </div>
   );

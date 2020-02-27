@@ -1,4 +1,4 @@
-import React, { FC, useContext, useEffect } from 'react';
+import React, { FC, useContext, memo, useState, useEffect } from 'react';
 import {
   Toolbar,
   AppBar,
@@ -6,12 +6,14 @@ import {
   Typography,
   Badge,
   Button,
-  useScrollTrigger
+  useScrollTrigger,
+  Slide
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import cartContext from '../../providers/cartContext';
+import transitions from '@material-ui/core/styles/transitions';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,6 +30,12 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     palidCart: {
       color: 'white'
+    },
+    paddingCart: {
+      padding: theme.spacing(3)
+    },
+    setBackground: {
+      background: 'rgba(0,0,0,0.4)'
     }
   })
 );
@@ -38,31 +46,28 @@ interface Props {
 }
 
 interface IProps {
-  window?: () => Window;
-  children: React.ReactElement;
+  window?: Window;
 }
 
 const Appbar: FC<Props> = ({ appName, handleToggle }) => {
+  const [trig, setTrig] = useState(false);
   const { cartCount } = useContext(cartContext);
   const classes = useStyles();
 
-  function ChangeOnScroll({ window, children }: IProps) {
-    const trigger = useScrollTrigger({
-      target: window ? window() : undefined,
-      disableHysteresis: true,
-      threshold: 700
-    });
-    return React.cloneElement(children, {
-      color: trigger ? 'inherit' : 'transparent',
-      style: {
-        background: trigger ? 'rgba(0,0,0,0.7)' : 'rgba(0,0,0,0.2)'
-      }
-    });
-  }
+  const trigger = useScrollTrigger({
+    target: window,
+    disableHysteresis: true,
+    threshold: 750
+  });
+
+  useEffect(() => {
+    setTrig(!trig);
+  }, [trigger]);
+
   return (
     <div className={classes.root}>
-      <ChangeOnScroll>
-        <AppBar color="transparent" elevation={0}>
+      <Slide appear={false} direction="down" in={!trig}>
+        <AppBar elevation={0} className={classes.setBackground}>
           <Toolbar>
             <IconButton
               color="inherit"
@@ -79,21 +84,22 @@ const Appbar: FC<Props> = ({ appName, handleToggle }) => {
             >
               {appName}
             </Typography>
-            <Button onClick={handleToggle} color="inherit">
+            <Button color="inherit" className={classes.paddingCart}>
               <Badge
                 badgeContent={cartCount}
                 className={classes.palidCart}
                 color="secondary"
                 showZero
+                onClick={handleToggle}
               >
                 <ShoppingCartIcon />
               </Badge>
             </Button>
           </Toolbar>
         </AppBar>
-      </ChangeOnScroll>
+      </Slide>
     </div>
   );
 };
 
-export default Appbar;
+export default memo(Appbar);

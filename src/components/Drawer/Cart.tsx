@@ -3,9 +3,8 @@ import React, { FC, useContext, useState, useEffect } from 'react';
 import Drawer from '@material-ui/core/Drawer';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { Grid, Divider, Typography, Button } from '@material-ui/core';
-import cartContext, { Item } from '../../providers/cartContext';
-
-import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
+import cartContext from '../../providers/cartContext';
+import CartItem from './CartItem';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -19,7 +18,9 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: theme.spacing(3)
     },
     itemCart: {
-      padding: theme.spacing(3)
+      padding: theme.spacing(3),
+      display: 'flex',
+      flexDirection: 'row'
     },
     tallyWrapper: {
       padding: theme.spacing(3)
@@ -46,31 +47,17 @@ const Carting: FC<Props> = ({ open, toggleDrawer }) => {
   return (
     <Drawer anchor="right" open={open} onClose={toggleDrawer}>
       <div className={classes.root}>
-        <Grid container direction="row">
-          {cart.length > 0 ? (
-            cart.map(({ name, count, price }, i) => (
-              <Grid key={i} item className={classes.itemCart}>
-                <Typography>{name}</Typography>
-                <Typography>
-                  Unidad: {count} {count > 1 ? 'unidades' : 'unidad'}
-                </Typography>
-                <Typography>Precio: ${price}</Typography>
-                <Grid item>
-                  <Button component="button" onClick={() => handleRemove(i)}>
-                    <DeleteOutlinedIcon />
-                  </Button>
-                </Grid>
-                <Divider />
-              </Grid>
-            ))
-          ) : (
-            <Grid item>
-              <Typography className={classes.cartText}>
-                No hay productos seleccionados
-              </Typography>
-            </Grid>
-          )}
-        </Grid>
+        {cart.length > 0 ? (
+          cart.map(({ name, count, price }, i) => (
+            <CartItem name={name} count={count} key={i} price={price} />
+          ))
+        ) : (
+          <Grid container>
+            <Typography className={classes.cartText}>
+              No hay productos seleccionados
+            </Typography>
+          </Grid>
+        )}
         <Divider />
         <Grid
           container
