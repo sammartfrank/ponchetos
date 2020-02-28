@@ -19,7 +19,7 @@ import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      width: theme.spacing(40)
+      width: theme.spacing(30)
     },
     sideMenu: {
       background: 'rgba(100,100,100,0.6)'
@@ -67,6 +67,9 @@ const SideMenu: FC<Props> = ({ toggleDrawer, open }) => {
               <ListItemText primary="Facebook" />
             </ListItem>
           </Link>
+          <ListItem button>
+            <ListItemText secondary="Seguinos en las redes" />
+          </ListItem>
         </List>
       </div>
     </Drawer>

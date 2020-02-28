@@ -77,7 +77,7 @@ const Home: FC = () => {
         <Container maxWidth="sm" className={classes.textMarg}>
           <Textin trig={trig} trig2={trig2} handlePurchase={handlePurchase} />
         </Container>
-        {purchasing && <Ponchos />}
+        {purchasing && <Ponchos handleSection={handlePurchase} />}
       </div>
     </div>
   );

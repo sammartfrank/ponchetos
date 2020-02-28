@@ -7,8 +7,11 @@ import {
   Fade,
   Slide,
   useScrollTrigger,
-  Typography
+  Typography,
+  Button
 } from '@material-ui/core';
+
+import CloseIcon from '@material-ui/icons/Close';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,13 +34,23 @@ const useStyles = makeStyles((theme: Theme) =>
         height: '100vh',
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        position: 'relative'
+      },
+      closeSect: {
+        position: 'absolute',
+        top: 75,
+        right: 10
       }
     }
   })
 );
 
-const Ponchos: FC = () => {
+interface IProps {
+  handleSection: () => void;
+}
+
+const Ponchos: FC<IProps> = ({ handleSection }) => {
   const classes = useStyles();
   const [trig, setTrig] = useState(false);
 
@@ -55,6 +68,11 @@ const Ponchos: FC = () => {
       timeout={{ enter: 600, exit: 600 }}
     >
       <div className={classes.root}>
+        <div className={classes.closeSect}>
+          <Button onClick={handleSection}>
+            <CloseIcon />
+          </Button>
+        </div>
         <Typography color="inherit">
           Productos en Construccion, gracias!
         </Typography>
