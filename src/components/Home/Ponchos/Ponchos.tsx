@@ -12,15 +12,27 @@ import {
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      background: 'white',
-      height: '100vh',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center'
+    [theme.breakpoints.down('sm')]: {
+      root: {
+        backgroundImage: `url(https://images.unsplash.com/photo-1560233863-7b0ea060b62e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=572&q=80)`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        height: '100vh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+      }
     },
-    '&:hover': {
-      color: '#ff0000'
+    [theme.breakpoints.up('md')]: {
+      root: {
+        backgroundImage: `url(https://images.unsplash.com/photo-1512115549354-d9a60c97f640?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80)`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        height: '100vh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+      }
     }
   })
 );
@@ -43,7 +55,7 @@ const Ponchos: FC = () => {
       timeout={{ enter: 600, exit: 600 }}
     >
       <div className={classes.root}>
-        <Typography variant="h2" color="inherit">
+        <Typography color="inherit">
           Productos en Construccion, gracias!
         </Typography>
       </div>
