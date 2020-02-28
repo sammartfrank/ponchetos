@@ -24,9 +24,10 @@ type StateType = {
 
 interface IProps {
   slides: string[];
+  autoPlay: boolean;
 }
 
-const Slider: FC<IProps> = ({ slides }) => {
+const Slider: FC<IProps> = ({ slides, autoPlay }) => {
   const classes = useStyles();
   const [state, setState] = useState<StateType>({
     translate: 0,
@@ -68,6 +69,7 @@ const Slider: FC<IProps> = ({ slides }) => {
       translate: (activeIndex - 1) * getWidth()
     });
   };
+
   return (
     <div className={classes.root}>
       <SliderContent
@@ -79,8 +81,12 @@ const Slider: FC<IProps> = ({ slides }) => {
           <Slide key={slide} content={slide} width={getWidth()} />
         ))}
       </SliderContent>
-      <Arrow direction="left" handleClick={prevSlide} />
-      <Arrow direction="right" handleClick={nextSlide} />
+      {autoPlay ? null : (
+        <>
+          <Arrow direction="left" handleClick={prevSlide} />
+          <Arrow direction="right" handleClick={nextSlide} />
+        </>
+      )}
     </div>
   );
 };

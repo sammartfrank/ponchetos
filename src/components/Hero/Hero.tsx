@@ -26,6 +26,19 @@ const useStyles = makeStyles((theme: Theme) =>
       top: '50%',
       left: '50%',
       transform: 'translate(-50%, -50%)'
+    },
+    [theme.breakpoints.down('sm')]: {
+      respFont: {
+        fontSize: theme.spacing(3),
+        letterSpacing: theme.spacing(1)
+      }
+    },
+    [theme.breakpoints.up('md')]: {
+      respFont: {
+        fontSize: theme.spacing(8),
+        fontWeight: 500,
+        letterSpacing: theme.spacing(8)
+      }
     }
   })
 );
@@ -40,10 +53,10 @@ const Hero: FC = () => {
   const classes = useStyles();
   return (
     <div>
-      <Slider slides={images} />
+      <Slider slides={images} autoPlay={false} />
       <div className={classes.heroTitle}>
         <Fade in={true} timeout={{ enter: 1500, exit: 1600 }}>
-          <Typography color="inherit" variant="h1">
+          <Typography color="inherit" className={classes.respFont}>
             Ponchetos
           </Typography>
         </Fade>

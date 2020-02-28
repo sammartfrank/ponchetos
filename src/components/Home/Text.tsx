@@ -6,76 +6,108 @@ import { Slide, Typography, Button } from '@material-ui/core';
 
 interface Props {
   trig: boolean;
+  handlePurchase: () => void;
   trig2: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    textWrapper: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      textAlign: 'justify',
-      paddingTop: theme.spacing(15),
-      marginBottom: theme.spacing(10)
+    // Mobile
+    [theme.breakpoints.down('sm')]: {
+      // Object Structure
+      textWrapper: {
+        display: 'flex',
+        paddingTop: theme.spacing(10),
+        flexDirection: 'column'
+      },
+      //Title
+      title: {
+        color: 'white',
+        marginTop: theme.spacing(5),
+        marginBottom: theme.spacing(5)
+      },
+      //Text
+      textPoncheto: {
+        marginBottom: theme.spacing(5),
+        lineHeight: theme.spacing(0.3),
+        color: 'white',
+        textAlign: 'justify'
+      },
+      //Button
+      button: {
+        marginTop: theme.spacing(5),
+        marginBottom: theme.spacing(5),
+        color: 'white'
+      }
     },
-    title: {
-      marginTop: theme.spacing(5),
-      marginBottom: theme.spacing(5)
-    },
-    textPoncheto: {
-      marginBottom: theme.spacing(5)
-    },
-    span: {
-      color: 'darkgreen',
-      marginLeft: theme.spacing(1),
-      marginRight: theme.spacing(1)
+    [theme.breakpoints.up('md')]: {
+      textWrapper: {
+        display: 'flex',
+        paddingTop: theme.spacing(10),
+        flexDirection: 'column'
+      },
+      title: {
+        marginTop: theme.spacing(5),
+        marginBottom: theme.spacing(5),
+        color: 'black'
+      },
+      button: {
+        marginTop: theme.spacing(5),
+        marginBottom: theme.spacing(5),
+        alignItems: 'center'
+      }
     }
   })
 );
 
-const Textin: FC<Props> = ({ trig, trig2 }) => {
+const Textin: FC<Props> = ({ trig, trig2, handlePurchase }) => {
   const classes = useStyles();
   return (
-    <div className={classes.textWrapper}>
-      <Slide
-        appear={false}
-        direction="up"
-        in={!trig}
-        timeout={{ enter: 750, exit: 750 }}
-      >
-        <Typography
-          variant="h3"
-          color="textPrimary"
-          component="h3"
-          className={classes.title}
+    <div className={classes.root}>
+      <div className={classes.textWrapper}>
+        <Slide
+          appear={false}
+          direction="up"
+          in={!trig}
+          timeout={{ enter: 750, exit: 750 }}
         >
-          Nuestros Productos
-        </Typography>
-      </Slide>
+          <Typography variant="h3" component="h3" className={classes.title}>
+            Nuestros Productos
+          </Typography>
+        </Slide>
+        <Slide
+          in={!trig2}
+          direction="up"
+          appear={false}
+          timeout={{ enter: 750, exit: 750 }}
+        >
+          <Typography
+            variant="body1"
+            component="p"
+            className={classes.textPoncheto}
+          >
+            Hechos a medida, a mano y con la mejor microfibra de toalla. Con
+            nuestras propias maquinas, con nuestra fuerza del Mar. Una verdadera
+            pasion, que nos impulsa a emprender nuevos caminos, nuevos
+            horizontes, nuevas emociones.
+          </Typography>
+        </Slide>
+      </div>
       <Slide
         in={!trig2}
         direction="up"
         appear={false}
-        timeout={{ enter: 750, exit: 750 }}
+        timeout={{ enter: 800, exit: 500 }}
       >
-        <Typography
-          variant="body1"
-          color="textPrimary"
-          component="p"
-          className={classes.textPoncheto}
+        <Button
+          variant="outlined"
+          color="inherit"
+          onClick={handlePurchase}
+          className={classes.button}
         >
-          Hechos a medida, a mano y con la mejor microfibra de toalla. Con
-          nuestras propias maquinas, con nuestra fuerza del
-          <span className={classes.span}>Mar.</span>
-          Una verdadera pasion, que nos impulsa a emprender nuevos caminos,
-          nuevos horizontes, nuevas emociones.
-        </Typography>
+          Comprar
+        </Button>
       </Slide>
-      <Button variant="contained" color="primary">
-        Comprar
-      </Button>
     </div>
   );
 };

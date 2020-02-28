@@ -42,14 +42,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface Props {
   appName: string;
-  handleToggle: () => void;
+  handleToggleMenu: () => void;
+  handleToggleCart: () => void;
 }
 
-interface IProps {
-  window?: Window;
-}
-
-const Appbar: FC<Props> = ({ appName, handleToggle }) => {
+const Appbar: FC<Props> = ({ appName, handleToggleMenu, handleToggleCart }) => {
   const [trig, setTrig] = useState(false);
   const { cartCount } = useContext(cartContext);
   const classes = useStyles();
@@ -80,6 +77,7 @@ const Appbar: FC<Props> = ({ appName, handleToggle }) => {
               aria-label="menu"
               aria-haspopup="true"
               className={classes.menuButton}
+              onClick={handleToggleMenu}
             >
               <MenuIcon />
             </IconButton>
@@ -96,7 +94,7 @@ const Appbar: FC<Props> = ({ appName, handleToggle }) => {
                 className={classes.palidCart}
                 color="secondary"
                 showZero
-                onClick={handleToggle}
+                onClick={handleToggleCart}
               >
                 <ShoppingCartIcon />
               </Badge>
