@@ -53,7 +53,7 @@ const Hero: FC = () => {
   const classes = useStyles();
   return (
     <div>
-      <Slider slides={images} autoPlay={false} />
+      <Slider slides={images} autoPlay={true} />
       <div className={classes.heroTitle}>
         <Fade in={true} timeout={{ enter: 1500, exit: 1600 }}>
           <Typography color="inherit" className={classes.respFont}>

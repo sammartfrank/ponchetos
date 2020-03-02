@@ -1,16 +1,28 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 
-import { Container, createStyles, makeStyles, Theme } from '@material-ui/core';
+import Filler from './Filler';
+
+import { createStyles, makeStyles, Theme } from '@material-ui/core';
 const useStyles = makeStyles((theme: Theme) =>
-  createStyles({ root: { border: '1px solid red' } })
+  createStyles({
+    progressBar: {
+      border: '1px solid black',
+      maxwidth: '430px',
+      width: 'inherit',
+      margin: theme.spacing(1)
+    }
+  })
 );
-const ProgressBar: FC = () => {
+interface Props {
+  progress: number;
+}
+const ProgressBar: FC<Props> = ({ progress }) => {
   const classes = useStyles();
   return (
-    <div>
-      <div className={classes.root}>
-        <Container maxWidth="sm"></Container>
-      </div>
+    <div className={classes.progressBar}>
+      <Filler width={progress} />
     </div>
   );
 };
+
+export default ProgressBar;

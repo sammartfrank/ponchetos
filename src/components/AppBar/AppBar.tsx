@@ -88,13 +88,16 @@ const Appbar: FC<Props> = ({ appName, handleToggleMenu, handleToggleCart }) => {
             >
               {appName}
             </Typography>
-            <Button color="inherit" className={classes.paddingCart}>
+            <Button
+              color="inherit"
+              className={classes.paddingCart}
+              onClick={handleToggleCart}
+            >
               <Badge
                 badgeContent={cartCount}
                 className={classes.palidCart}
                 color="secondary"
                 showZero
-                onClick={handleToggleCart}
               >
                 <ShoppingCartIcon />
               </Badge>

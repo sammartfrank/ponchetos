@@ -1,4 +1,4 @@
-import React, { useState, FC } from 'react';
+import React, { useState, useRef, FC, useEffect } from 'react';
 
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import SliderContent from './SliderContent';
@@ -31,8 +31,8 @@ const Slider: FC<IProps> = ({ slides, autoPlay }) => {
   const classes = useStyles();
   const [state, setState] = useState<StateType>({
     translate: 0,
-    transition: 1,
-    activeIndex: 0
+    activeIndex: 0,
+    transition: 1
   });
 
   const getWidth = () => window.innerWidth;
@@ -69,6 +69,22 @@ const Slider: FC<IProps> = ({ slides, autoPlay }) => {
       translate: (activeIndex - 1) * getWidth()
     });
   };
+
+  const autoPlayRef = useRef(nextSlide);
+
+  useEffect(() => {
+    autoPlayRef.current = nextSlide;
+  });
+
+  useEffect(() => {
+    const play = () => {
+      autoPlayRef.current();
+    };
+    if (autoPlay !== null) {
+      const interval = setInterval(play, 5000);
+      return () => clearInterval(interval);
+    }
+  }, [autoPlay]);
 
   return (
     <div className={classes.root}>

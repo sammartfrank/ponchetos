@@ -2,11 +2,10 @@ import React, { FC } from 'react';
 
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
-import { Slide, Typography, Button } from '@material-ui/core';
+import { Slide, Typography } from '@material-ui/core';
 
 interface Props {
   trig: boolean;
-  handlePurchase: () => void;
   trig2: boolean;
 }
 
@@ -60,7 +59,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const Textin: FC<Props> = ({ trig, trig2, handlePurchase }) => {
+const Textin: FC<Props> = ({ trig, trig2 }) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -93,21 +92,6 @@ const Textin: FC<Props> = ({ trig, trig2, handlePurchase }) => {
           </Typography>
         </Slide>
       </div>
-      <Slide
-        in={!trig2}
-        direction="up"
-        appear={false}
-        timeout={{ enter: 800, exit: 500 }}
-      >
-        <Button
-          variant="outlined"
-          color="inherit"
-          onClick={handlePurchase}
-          className={classes.button}
-        >
-          Comprar
-        </Button>
-      </Slide>
     </div>
   );
 };

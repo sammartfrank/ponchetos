@@ -1,11 +1,13 @@
 import React, { FC, useEffect, useState, useRef } from 'react';
-import { Container, useScrollTrigger } from '@material-ui/core';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import { Item } from '../../providers/cartContext';
-import { ponchos } from './ponchos';
+import {
+  Container,
+  useScrollTrigger,
+  makeStyles,
+  createStyles,
+  Theme
+} from '@material-ui/core';
 import Textin from './Text';
 import Ponchos from './Ponchos/Ponchos';
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     [theme.breakpoints.down('sm')]: {
@@ -45,19 +47,14 @@ const Home: FC = () => {
   const classes = useStyles();
   const [trig, setTrig] = useState(false);
   const [trig2, setTrig2] = useState(false);
-  const [purchasing, setPurchasing] = useState(false);
 
-  const handlePurchase = () => {
-    setPurchasing(!purchasing);
-  };
-
-  const trigger = useScrollTrigger({
+  const titleTrigger = useScrollTrigger({
     target: window,
     disableHysteresis: true,
     threshold: 350
   });
 
-  const trigger2 = useScrollTrigger({
+  const textTrigger = useScrollTrigger({
     target: window,
     disableHysteresis: true,
     threshold: 450
@@ -65,20 +62,20 @@ const Home: FC = () => {
 
   useEffect(() => {
     setTrig(!trig);
-  }, [trigger]);
+  }, [titleTrigger]);
 
   useEffect(() => {
     setTrig2(!trig2);
-  }, [trigger2]);
+  }, [textTrigger]);
 
   return (
     <div className={classes.root}>
       <div className={classes.homeBack}>
         <Container maxWidth="sm" className={classes.textMarg}>
-          <Textin trig={trig} trig2={trig2} handlePurchase={handlePurchase} />
+          <Textin trig={trig} trig2={trig2} />
         </Container>
-        {purchasing && <Ponchos handleSection={handlePurchase} />}
       </div>
+      <Ponchos />
     </div>
   );
 };
