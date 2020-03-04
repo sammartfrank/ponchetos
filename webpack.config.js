@@ -17,7 +17,7 @@ module.exports = {
         loader: 'awesome-typescript-loader'
       },
       {
-        test: /\.(jpeg|jpg|JPG|png|svg|mp4)?$/gi,
+        test: /\.(jpeg|jpg|JPG|png|svg|mp4|ico)?$/gi,
         loader: 'file-loader'
       },
       {

@@ -1,8 +1,9 @@
-import { FC } from 'react';
+import React from 'react';
 interface Props {
     appName: string;
-    handleToggle: () => void;
+    handleToggleMenu: () => void;
+    handleToggleCart: () => void;
 }
-declare const Appbar: FC<Props>;
-export default Appbar;
+declare const _default: React.NamedExoticComponent<Props>;
+export default _default;
 //# sourceMappingURL=AppBar.d.ts.map
