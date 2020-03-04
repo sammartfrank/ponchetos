@@ -9,11 +9,11 @@ import {
   useScrollTrigger,
   Slide
 } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import cartContext from '../../providers/cartContext';
-import transitions from '@material-ui/core/styles/transitions';
+
+import ep from './ara.png';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -79,7 +79,7 @@ const Appbar: FC<Props> = ({ appName, handleToggleMenu, handleToggleCart }) => {
               className={classes.menuButton}
               onClick={handleToggleMenu}
             >
-              <MenuIcon />
+              <img src={ep} alt="" height="50" width="50" />
             </IconButton>
             <Typography
               variant="h6"
