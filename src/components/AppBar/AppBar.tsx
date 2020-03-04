@@ -13,7 +13,7 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import cartContext from '../../providers/cartContext';
 
-import ep from './ara.png';
+import ep from '../../../ara.png';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
